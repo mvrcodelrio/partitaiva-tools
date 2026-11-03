@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://mvrcodelrio.github.io/partitaiva-tools/sitemap.xml
