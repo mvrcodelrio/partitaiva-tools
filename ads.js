@@ -1,7 +1,7 @@
 // Config: compila dopo aver aperto gli account. Lasciato vuoto = nessun annuncio.
 window.SITE_CONFIG = {
   adsenseClient: "",   // es. "ca-pub-XXXXXXXXXXXXXXXX"
-  buyUrl: ""           // link Gumroad/Stripe del template
+  buyUrl: "https://delriomarco.gumroad.com/l/ddknqn"           // link Gumroad/Stripe del template
 };
 (function () {
   var c = window.SITE_CONFIG;
