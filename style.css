@@ -35,3 +35,4 @@ small{color:var(--mut);font-size:.85rem}
 footer{color:var(--mut);font-size:.85rem;border-top:1px solid var(--bd);margin-top:20px}
 footer a{color:var(--mut)}
 @media(max-width:520px){body{font-size:16px}header.brand img{width:88px}header.brand span{font-size:.78rem}.card{padding:18px}}
+.vq-btn{display:inline-block;margin-top:8px;padding:10px 20px;border-radius:999px;background:var(--ac);color:var(--acfg);font-weight:600;text-decoration:none}
