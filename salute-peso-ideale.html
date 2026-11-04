@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calcolo peso ideale: intervallo sano in base all&#x27;altezza | Vanquish Salute</title>
+<meta name="description" content="Calcola l&#x27;intervallo di peso sano per la tua altezza (BMI 18,5-24,9) e il peso con la formula di Devine.">
+<link rel="canonical" href="https://mvrcodelrio.github.io/partitaiva-tools/salute-peso-ideale.html">
+<link rel="icon" href="vanquish-logo.webp">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="brand"><a href="index.html" aria-label="Vanquish"><img src="vanquish-logo.webp" alt="Vanquish" width="104" height="52"></a><span><a href="salute.html" style="font-size:.85rem;color:inherit;text-decoration:none;font-weight:600">Vanquish Salute</a><br>calcolatori per il benessere</span></header>
+<main>
+<h1>Calcolo peso ideale</h1>
+<div class="card">
+<label for="sx">Sesso</label><select id="sx"><option value="m">Uomo</option><option value="f">Donna</option></select>
+<label for="cm">Altezza (cm)</label><input id="cm" type="number" step="0.1" value="170">
+<button id="go">Calcola</button><div class="res" id="out"></div></div>
+<h2>Due metodi, due risultati</h2>
+<p>L'<b>intervallo sano</b> è il peso che porta il BMI tra 18,5 e 24,9, valori considerati nella norma dall'OMS per gli adulti. La <b>formula di Devine</b> dà un singolo valore: 50 kg (uomo) o 45,5 kg (donna) più 2,3 kg per ogni pollice sopra i 5 piedi (152,4 cm). Sono riferimenti orientativi, non obiettivi universali.</p>
+<p>Vedi anche: <a href="salute-bmi.html">calcolo BMI</a> · <a href="salute-peso-ideale-altezza-170-cm.html">peso ideale per 170 cm</a></p>
+<div class="ad" data-slot="mid"></div>
+<p><small>Strumento informativo: non sostituisce il parere di un medico, di un dietologo o di un professionista sanitario. In caso di patologie, gravidanza o dubbi, rivolgiti a uno specialista.</small></p>
+</main>
+<footer>Vanquish · <a href="salute.html">Salute</a> · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a></footer>
+<script>
+document.getElementById('go').onclick=()=>{
+const c=+cm.value,h=c/100;if(!(c>100)){out.innerHTML='<div><span>Inserisci l\'altezza</span></div>';return}
+const inch=Math.max((c-152.4)/2.54,0),dev=(sx.value==='m'?50:45.5)+2.3*inch,f=n=>n.toFixed(1).replace('.',',');
+out.innerHTML=`<div class="tot"><span>Intervallo sano (BMI 18,5-24,9)</span><b>${f(18.5*h*h)} - ${f(24.9*h*h)} kg</b></div><div><span>Formula di Devine</span><b>${f(dev)} kg</b></div>`};
+document.getElementById('go').click();
+</script><script src="ads.js"></script></body></html>
