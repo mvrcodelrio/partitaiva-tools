@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calcolo rata prestito e mutuo: rata mensile e interessi | Vanquish</title>
+<meta name="description" content="Calcola la rata mensile di un prestito o mutuo a tasso fisso con ammortamento alla francese: importo, TAN e durata.">
+<link rel="canonical" href="https://mvrcodelrio.github.io/partitaiva-tools/calcolo-rata-prestito.html">
+<link rel="icon" href="vanquish-logo.webp">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="brand"><a href="index.html" aria-label="Vanquish"><img src="vanquish-logo.webp" alt="Vanquish" width="104" height="52"></a><span>Strumenti gratuiti per lavoro e fisco</span></header>
+<main>
+<h1>Calcolo rata prestito o mutuo</h1>
+<div class="card">
+<label for="cap">Importo finanziato (€)</label><input id="cap" type="number" min="0" value="10000">
+<label for="tan">TAN annuo (%)</label><input id="tan" type="number" step="0.01" value="5">
+<label for="mesi">Durata (mesi)</label><input id="mesi" type="number" min="1" value="60">
+<button id="go">Calcola</button><div class="res" id="out"></div></div>
+<h2>Come funziona</h2>
+<p>La rata costante si calcola con la formula dell'ammortamento alla francese: rata = C × r ÷ (1 − (1 + r)<sup>−n</sup>), dove C è il capitale, r il tasso mensile (TAN ÷ 12) e n il numero di rate. Il calcolo non include spese di istruttoria, assicurazioni o imposte: il costo reale (TAEG) può essere più alto.</p>
+<p>Vedi anche: <a href="calcolo-percentuale.html">calcolo percentuale</a> · <a href="calcolo-eta.html">calcolo età</a></p>
+<div class="ad" data-slot="mid"></div>
+<p><small>Strumento a scopo indicativo: non sostituisce la consulenza di un professionista. Norme, aliquote e importi cambiano: verifica sempre i valori in vigore.</small></p>
+</main>
+<footer>Vanquish · <a href="index.html">Home</a> · <a href="guide.html">Guide</a> · <a href="privacy.html">Privacy</a></footer>
+<script>const f=n=>n.toLocaleString('it-IT',{style:'currency',currency:'EUR'});
+document.getElementById('go').onclick=()=>{
+const C=+cap.value||0,n=Math.max(+mesi.value||1,1),r=(+tan.value||0)/1200;
+const rata=r===0?C/n:C*r/(1-Math.pow(1+r,-n)),tot=rata*n;
+out.innerHTML=`<div class="tot"><span>Rata mensile</span><b>${f(rata)}</b></div><div><span>Totale da restituire</span><b>${f(tot)}</b></div><div><span>Interessi totali</span><b>${f(tot-C)}</b></div>`};
+document.getElementById('go').click();
+</script><script src="ads.js"></script></body></html>
