@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calcolo percentuale: quanto è il X%, sconto e variazione | Vanquish</title>
+<meta name="description" content="Calcola la percentuale di un numero, quanto percento è un valore su un altro, sconto e aumento percentuale. Gratis e immediato.">
+<link rel="canonical" href="https://mvrcodelrio.github.io/partitaiva-tools/calcolo-percentuale.html">
+<link rel="icon" href="vanquish-logo.webp">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="brand"><a href="index.html" aria-label="Vanquish"><img src="vanquish-logo.webp" alt="Vanquish" width="104" height="52"></a><span>Strumenti gratuiti per lavoro e fisco</span></header>
+<main>
+<h1>Calcolo percentuale</h1>
+<div class="card">
+<label for="mode">Cosa vuoi calcolare?</label>
+<select id="mode">
+<option value="p">Il X% di un numero</option>
+<option value="q">Quanto percento è A su B</option>
+<option value="s">Prezzo dopo uno sconto del X%</option>
+<option value="a">Prezzo dopo un aumento del X%</option>
+<option value="v">Variazione percentuale da A a B</option>
+</select>
+<label for="x" id="lx">X (%)</label><input id="x" type="number" step="any" value="20">
+<label for="y" id="ly">Numero</label><input id="y" type="number" step="any" value="150">
+<button id="go">Calcola</button><div class="res" id="out"></div></div>
+<h2>Formule</h2>
+<p>Il X% di N: N × X ÷ 100. A su B in percentuale: A ÷ B × 100. Sconto: N × (1 − X ÷ 100). Aumento: N × (1 + X ÷ 100). Variazione da A a B: (B − A) ÷ A × 100.</p>
+<p>Vedi anche: <a href="scorporo-iva.html">scorporo IVA</a> · <a href="giorni-tra-due-date.html">giorni tra due date</a></p>
+<div class="ad" data-slot="mid"></div>
+<p><small>Strumento a scopo indicativo: non sostituisce la consulenza di un professionista. Norme, aliquote e importi cambiano: verifica sempre i valori in vigore.</small></p>
+</main>
+<footer>Vanquish · <a href="index.html">Home</a> · <a href="guide.html">Guide</a> · <a href="privacy.html">Privacy</a></footer>
+<script>
+const nf=n=>n.toLocaleString('it-IT',{maximumFractionDigits:4});
+const L={p:['X (%)','Numero'],q:['A','B'],s:['Sconto X (%)','Prezzo di partenza'],a:['Aumento X (%)','Prezzo di partenza'],v:['A (valore iniziale)','B (valore finale)']};
+function lab(){lx.textContent=L[mode.value][0];ly.textContent=L[mode.value][1]}
+mode.onchange=()=>{lab();go.click()};lab();
+document.getElementById('go').onclick=()=>{
+const X=+x.value,Y=+y.value;let r,u='';const m=mode.value;
+if(m==='p')r=Y*X/100;
+else if(m==='q'){r=Y?X/Y*100:NaN;u=' %'}
+else if(m==='s')r=Y*(1-X/100);
+else if(m==='a')r=Y*(1+X/100);
+else{r=X?(Y-X)/X*100:NaN;u=' %'}
+out.innerHTML=`<div class="tot"><span>Risultato</span><b>${isFinite(r)?nf(r)+u:'non calcolabile'}</b></div>`};
+document.getElementById('go').click();
+</script><script src="ads.js"></script></body></html>

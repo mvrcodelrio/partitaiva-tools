@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calcolo TFR: quanto matura in un anno e in totale | Vanquish</title>
+<meta name="description" content="Calcola il TFR maturato: quota annua pari alla retribuzione divisa per 13,5. Stima semplice con anni e mesi di servizio.">
+<link rel="canonical" href="https://mvrcodelrio.github.io/partitaiva-tools/calcolo-tfr.html">
+<link rel="icon" href="vanquish-logo.webp">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="brand"><a href="index.html" aria-label="Vanquish"><img src="vanquish-logo.webp" alt="Vanquish" width="104" height="52"></a><span>Strumenti gratuiti per lavoro e fisco</span></header>
+<main>
+<h1>Calcolo TFR</h1>
+<p>Stima del trattamento di fine rapporto maturato, senza rivalutazione.</p>
+<div class="card">
+<label for="ral">Retribuzione annua utile ai fini TFR (€)</label><input id="ral" type="number" min="0" value="30000">
+<label for="anni">Anni di servizio</label><input id="anni" type="number" min="0" value="5">
+<label for="mesi">Mesi aggiuntivi</label><input id="mesi" type="number" min="0" max="11" value="0">
+<button id="go">Calcola</button><div class="res" id="out"></div></div>
+<h2>Come si calcola</h2>
+<p>Ogni anno si accantona una quota pari alla retribuzione annua divisa per <b>13,5</b>. Il TFR accantonato viene poi rivalutato ogni anno (1,5% fisso più il 75% dell'inflazione): questa stima <b>non include rivalutazione né tassazione</b>, quindi il valore reale sarà diverso.</p>
+<p>Vedi anche: <a href="netto-lordo-stipendio.html">da RAL a netto</a> · <a href="giorni-tra-due-date.html">giorni tra due date</a></p>
+<div class="ad" data-slot="mid"></div>
+<p><small>Strumento a scopo indicativo: non sostituisce la consulenza di un professionista. Norme, aliquote e importi cambiano: verifica sempre i valori in vigore.</small></p>
+</main>
+<footer>Vanquish · <a href="index.html">Home</a> · <a href="guide.html">Guide</a> · <a href="privacy.html">Privacy</a></footer>
+<script>const f=n=>n.toLocaleString('it-IT',{style:'currency',currency:'EUR'});
+document.getElementById('go').onclick=()=>{
+const R=+ral.value||0,y=(+anni.value||0)+(+mesi.value||0)/12,q=R/13.5;
+out.innerHTML=`<div><span>Quota annua</span><b>${f(q)}</b></div><div><span>Quota mensile</span><b>${f(q/12)}</b></div><div class="tot"><span>TFR maturato (senza rivalutazione)</span><b>${f(q*y)}</b></div>`};
+document.getElementById('go').click();
+</script><script src="ads.js"></script></body></html>

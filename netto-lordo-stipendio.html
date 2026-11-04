@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calcolo stipendio netto da RAL: stima mensile e annua | Vanquish</title>
+<meta name="description" content="Stima lo stipendio netto da RAL: contributi INPS, IRPEF a scaglioni, detrazioni da lavoro dipendente e addizionali. Calcolo indicativo gratuito.">
+<link rel="canonical" href="https://mvrcodelrio.github.io/partitaiva-tools/netto-lordo-stipendio.html">
+<link rel="icon" href="vanquish-logo.webp">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="brand"><a href="index.html" aria-label="Vanquish"><img src="vanquish-logo.webp" alt="Vanquish" width="104" height="52"></a><span>Strumenti gratuiti per lavoro e fisco</span></header>
+<main>
+<h1>Da RAL a stipendio netto: stima</h1>
+<p>Inserisci la retribuzione annua lorda (RAL) per stimare contributi, IRPEF e netto, annuo e mensile.</p>
+<div class="card">
+<label for="ral">RAL, retribuzione annua lorda (€)</label><input id="ral" type="number" min="0" value="30000">
+<label for="mens">Mensilità</label>
+<select id="mens"><option value="12">12</option><option value="13" selected>13</option><option value="14">14</option></select>
+<label for="inps">Contributi INPS a carico del lavoratore (%)</label><input id="inps" type="number" step="0.01" value="9.19">
+<label for="add">Addizionali regionale + comunale (% stimata sull'imponibile)</label><input id="add" type="number" step="0.01" value="2">
+<label for="t1">Aliquota IRPEF fino a 28.000 € (%)</label><input id="t1" type="number" step="0.01" value="23">
+<label for="t2">Aliquota IRPEF da 28.000 a 50.000 € (%)</label><input id="t2" type="number" step="0.01" value="33">
+<label for="t3">Aliquota IRPEF oltre 50.000 € (%)</label><input id="t3" type="number" step="0.01" value="43">
+<button id="go">Calcola</button><div class="res" id="out"></div></div>
+<h2>Come viene stimato</h2>
+<p>Dalla RAL si tolgono i contributi INPS del lavoratore, ottenendo l'imponibile. Sull'imponibile si applica l'IRPEF per scaglioni, si sottrae la detrazione per lavoro dipendente e si aggiungono le addizionali locali.</p>
+<p><b>Cosa non è incluso:</b> bonus o riduzioni del cuneo fiscale, detrazioni per familiari a carico, bonus specifici, welfare aziendale. Le aliquote IRPEF sono modificabili: controlla quelle in vigore per l'anno corrente (il secondo scaglione è stato oggetto di modifiche). Il risultato è una stima, non una busta paga.</p>
+<p>Vedi anche: <a href="calcolo-tfr.html">calcolo TFR</a> · <a href="calcolo-percentuale.html">calcolo percentuale</a></p>
+<div class="ad" data-slot="mid"></div>
+<p><small>Strumento a scopo indicativo: non sostituisce la consulenza di un professionista. Norme, aliquote e importi cambiano: verifica sempre i valori in vigore.</small></p>
+</main>
+<footer>Vanquish · <a href="index.html">Home</a> · <a href="guide.html">Guide</a> · <a href="privacy.html">Privacy</a></footer>
+<script>const f=n=>n.toLocaleString('it-IT',{style:'currency',currency:'EUR'});
+document.getElementById('go').onclick=()=>{
+const R=+ral.value||0,m=+mens.value,i=(+inps.value||0)/100,ad=(+add.value||0)/100,a1=(+t1.value||0)/100,a2=(+t2.value||0)/100,a3=(+t3.value||0)/100;
+const contr=R*i,imp=Math.max(R-contr,0);
+let irpef=Math.min(imp,28000)*a1+Math.max(Math.min(imp,50000)-28000,0)*a2+Math.max(imp-50000,0)*a3;
+let det=0;
+if(imp<=15000)det=1955;else if(imp<=28000)det=1910+1190*(28000-imp)/13000;else if(imp<=50000)det=1910*(50000-imp)/22000;
+if(imp>0&&imp<=50000)det=Math.max(det,690);
+const irpefN=Math.max(irpef-det,0),addz=imp*ad,net=R-contr-irpefN-addz;
+out.innerHTML=`<div><span>RAL</span><b>${f(R)}</b></div><div><span>Contributi INPS</span><b>− ${f(contr)}</b></div><div><span>Imponibile</span><b>${f(imp)}</b></div><div><span>IRPEF lorda</span><b>${f(irpef)}</b></div><div><span>Detrazioni lavoro dipendente</span><b>− ${f(Math.min(det,irpef))}</b></div><div><span>Addizionali locali</span><b>− ${f(addz)}</b></div><div class="tot"><span>Netto annuo stimato</span><b>${f(net)}</b></div><div><span>Netto mensile (${m} mensilità)</span><b>${f(net/m)}</b></div>`};
+document.getElementById('go').click();
+</script><script src="ads.js"></script></body></html>

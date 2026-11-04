@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Giorni tra due date: calcolo giorni, settimane e lavorativi | Vanquish</title>
+<meta name="description" content="Calcola quanti giorni passano tra due date, in settimane, mesi e giorni lavorativi (esclusi sabato e domenica).">
+<link rel="canonical" href="https://mvrcodelrio.github.io/partitaiva-tools/giorni-tra-due-date.html">
+<link rel="icon" href="vanquish-logo.webp">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="brand"><a href="index.html" aria-label="Vanquish"><img src="vanquish-logo.webp" alt="Vanquish" width="104" height="52"></a><span>Strumenti gratuiti per lavoro e fisco</span></header>
+<main>
+<h1>Giorni tra due date</h1>
+<div class="card">
+<label for="d1">Data iniziale</label><input id="d1" type="date">
+<label for="d2">Data finale</label><input id="d2" type="date">
+<button id="go">Calcola</button><div class="res" id="out"></div></div>
+<h2>Cosa viene calcolato</h2>
+<p>Giorni di calendario tra le due date (la data finale non è inclusa), settimane intere e giorni lavorativi dal lunedì al venerdì. Le festività nazionali e locali <b>non</b> sono sottratte.</p>
+<p>Vedi anche: <a href="calcolo-tfr.html">calcolo TFR</a> · <a href="calcolo-percentuale.html">calcolo percentuale</a></p>
+<div class="ad" data-slot="mid"></div>
+<p><small>Strumento a scopo indicativo: non sostituisce la consulenza di un professionista. Norme, aliquote e importi cambiano: verifica sempre i valori in vigore.</small></p>
+</main>
+<footer>Vanquish · <a href="index.html">Home</a> · <a href="guide.html">Guide</a> · <a href="privacy.html">Privacy</a></footer>
+<script>
+const t=new Date(),iso=d=>d.toISOString().slice(0,10);
+d1.value=iso(t);const n=new Date(t);n.setDate(n.getDate()+30);d2.value=iso(n);
+document.getElementById('go').onclick=()=>{
+let a=new Date(d1.value),b=new Date(d2.value);
+if(isNaN(a)||isNaN(b)){out.innerHTML='<div><span>Inserisci due date valide</span></div>';return}
+let sign=1;if(b<a){[a,b]=[b,a];sign=-1}
+const days=Math.round((b-a)/86400000);let work=0;
+for(let i=0;i<days;i++){const d=new Date(a);d.setDate(d.getDate()+i);const w=d.getDay();if(w!==0&&w!==6)work++}
+out.innerHTML=`<div class="tot"><span>Giorni di calendario</span><b>${sign*days}</b></div><div><span>Giorni lavorativi (lun-ven)</span><b>${sign*work}</b></div><div><span>Settimane intere</span><b>${sign*Math.floor(days/7)}</b></div><div><span>Mesi (circa)</span><b>${(sign*days/30.4375).toFixed(1).replace('.',',')}</b></div>`};
+document.getElementById('go').click();
+</script><script src="ads.js"></script></body></html>
