@@ -1,30 +1,8 @@
 <!doctype html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calcolo BMI (indice di massa corporea) con tabella OMS | Vanquish Salute</title>
-<meta name="description" content="Calcola il tuo BMI da peso e altezza e scopri la categoria OMS: sottopeso, normopeso, sovrappeso, obesità. Gratis e immediato.">
-<link rel="canonical" href="https://mvrcodelrio.github.io/partitaiva-tools/salute-bmi.html">
-<link rel="icon" href="vanquish-logo.webp">
-<link rel="stylesheet" href="style.css"></head><body>
-<header class="brand"><a href="index.html" aria-label="Vanquish"><img src="vanquish-logo.webp" alt="Vanquish" width="104" height="52"></a><span><a href="salute.html" style="font-size:.85rem;color:inherit;text-decoration:none;font-weight:600">Vanquish Salute</a><br>calcolatori per il benessere</span></header>
-<main>
-<h1>Calcolo BMI: indice di massa corporea</h1>
-<div class="card">
-<label for="kg">Peso (kg)</label><input id="kg" type="number" step="0.1" min="0" value="70">
-<label for="cm">Altezza (cm)</label><input id="cm" type="number" step="0.1" min="0" value="170">
-<button id="go">Calcola</button><div class="res" id="out"></div></div>
-<h2>Categorie secondo l'OMS (adulti)</h2>
-<ul><li>Sotto 18,5: sottopeso</li><li>18,5 - 24,9: normopeso</li><li>25 - 29,9: sovrappeso</li><li>30 o più: obesità</li></ul>
-<p>Il BMI si calcola dividendo il peso in chilogrammi per il quadrato dell'altezza in metri. È un indicatore statistico semplice: non distingue massa grassa e muscolare, quindi può risultare alto in chi ha molta massa muscolare. Per capire meglio come leggerlo: <a href="salute-cos-e-il-bmi.html">cos'è il BMI</a>. Vedi anche il <a href="salute-peso-ideale.html">calcolo del peso ideale</a>.</p>
-<div class="ad" data-slot="mid"></div>
-<p><small>Strumento informativo: non sostituisce il parere di un medico, di un dietologo o di un professionista sanitario. In caso di patologie, gravidanza o dubbi, rivolgiti a uno specialista.</small></p>
-</main>
-<footer>Vanquish · <a href="salute.html">Salute</a> · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a></footer>
-<script>
-document.getElementById('go').onclick=()=>{
-const w=+kg.value,h=(+cm.value)/100;
-if(!(w>0&&h>0)){out.innerHTML='<div><span>Inserisci peso e altezza</span></div>';return}
-const b=w/(h*h);let c=b<18.5?'Sottopeso':b<25?'Normopeso':b<30?'Sovrappeso':'Obesità';
-const lo=18.5*h*h,hi=24.9*h*h;
-out.innerHTML=`<div class="tot"><span>Il tuo BMI</span><b>${b.toFixed(1).replace('.',',')}</b></div><div><span>Categoria</span><b>${c}</b></div><div><span>Peso per BMI 18,5-24,9</span><b>${lo.toFixed(1).replace('.',',')} - ${hi.toFixed(1).replace('.',',')} kg</b></div>`};
-document.getElementById('go').click();
-</script><script src="ads.js"></script></body></html>
+<title>Pagina spostata | Vanquish</title>
+<link rel="canonical" href="https://mvrcodelrio.github.io/vanquish-salute/salute-bmi.html">
+<meta http-equiv="refresh" content="0; url=https://mvrcodelrio.github.io/vanquish-salute/salute-bmi.html">
+</head><body>
+<p>Questa pagina è stata spostata su Vanquish Salute: <a href="https://mvrcodelrio.github.io/vanquish-salute/salute-bmi.html">https://mvrcodelrio.github.io/vanquish-salute/salute-bmi.html</a></p>
+</body></html>
