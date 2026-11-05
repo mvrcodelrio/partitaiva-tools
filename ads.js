@@ -54,3 +54,38 @@ window.SITE_CONFIG = {
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", add); else add();
 })();
+
+// Consenso cookie e statistiche (Google Analytics tramite Google Tag Manager, caricato solo dopo il consenso)
+(function () {
+  var GTM = "GTM-PP53V4K7", KEY = "vq_consent";
+  function load() {
+    if (window.__vqGtm) return;
+    window.__vqGtm = 1;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtm.js?id=" + GTM;
+    document.head.appendChild(s);
+  }
+  var c = null;
+  try { c = localStorage.getItem(KEY); } catch (e) {}
+  if (c === "yes") { load(); return; }
+  if (c === "no") return;
+  function show() {
+    var b = document.createElement("div");
+    b.setAttribute("role", "dialog");
+    b.setAttribute("aria-label", "Consenso cookie");
+    b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#12261f;color:#fdfbf0;padding:14px 20px;font:14px/1.5 system-ui,sans-serif;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center";
+    b.innerHTML = '<span style="max-width:620px">Usiamo cookie di misurazione (Google Analytics) per capire come viene usato il sito. Puoi accettare o rifiutare: il sito funziona allo stesso modo. <a href="privacy.html" style="color:#fdfbf0">Informativa</a></span>' +
+      '<button id="vq-no" style="margin:0;padding:8px 16px;border-radius:999px;border:1px solid #fdfbf0;background:transparent;color:#fdfbf0;cursor:pointer">Rifiuta</button>' +
+      '<button id="vq-yes" style="margin:0;padding:8px 16px;border-radius:999px;border:0;background:#fdfbf0;color:#12261f;font-weight:600;cursor:pointer">Accetta</button>';
+    document.body.appendChild(b);
+    function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} b.remove(); if (v === "yes") load(); }
+    document.getElementById("vq-yes").onclick = function () { set("yes"); };
+    document.getElementById("vq-no").onclick = function () { set("no"); };
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", show); else show();
+})();
